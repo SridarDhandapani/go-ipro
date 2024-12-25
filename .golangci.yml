@@ -1,0 +1,33 @@
+run:
+    timeout: 10m
+    go: 1.20
+linters:
+    disable-all: true
+    enable:
+        - govet
+        - gofumpt
+        - goimports
+        - gofmt
+        - errcheck
+        - ineffassign
+        - staticcheck
+        - stylecheck
+        - gocritic
+        - revive
+        - nolintlint
+        - forbidigo
+        - misspell
+issues:
+    exclude-use-default: false
+linters-settings:
+    revive:
+        rules:
+            - name: confusing-naming
+              disabled: true
+    nolintlint:
+        allow-leading-space: false
+    forbidigo:
+        forbid:
+            - ^ioutil.*$
+            - ^new$
+            - ^io.ReadAll$
