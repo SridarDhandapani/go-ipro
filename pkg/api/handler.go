@@ -94,10 +94,10 @@ func WithEndpointPrefix(basePath string) APIHandlerOption {
 
 func NewAPIHandler(username, password string, opts ...APIHandlerOption) *APIHandler {
 	options := &options{
-		client:         nil,
-		scheme:         HTTP,
+		client:         &http.Client{},
+		scheme:         HTTPS,
 		host:           "",
-		port:           80,
+		port:           443,
 		endpointPrefix: "/cgi-bin",
 	}
 	for _, opt := range opts {
@@ -105,8 +105,9 @@ func NewAPIHandler(username, password string, opts ...APIHandlerOption) *APIHand
 	}
 
 	client := &http.Client{Transport: &digest.Transport{
-		Username: username,
-		Password: password,
+		Username:  username,
+		Password:  password,
+		Transport: options.client.Transport,
 	}}
 	options.client = client
 
