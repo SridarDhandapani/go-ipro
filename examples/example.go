@@ -99,6 +99,14 @@ func main() {
 		fmt.Println(err)
 	}
 
+	dnMode := &model.DayNightMode{
+		Mode: enum.DayNightModeTypeOff,
+	}
+	err = c.SetDayNightMode(dnMode)(c.APIHandler)
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	s := &model.Stream{
 		Transmit:   enum.On,
 		EncodeType: enum.StreamEncodeTypeH264,
