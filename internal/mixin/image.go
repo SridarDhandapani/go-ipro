@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/SridarDhandapani/go-ipro/pkg/api"
+	"github.com/SridarDhandapani/go-ipro/pkg/model"
 	"github.com/google/go-querystring/query"
 	"gopkg.in/validator.v2"
 )
@@ -11,13 +12,13 @@ import (
 type ImageMixin struct{}
 
 // SetImageCaptureMode set image capture configurations.
-func (i *ImageMixin) SetImageCaptureMode(v interface{}) func(h *api.APIHandler) error {
+func (i *ImageMixin) SetImageCaptureMode(mode *model.CaptureMode) func(h *api.APIHandler) error {
 	return func(h *api.APIHandler) error {
-		if err := validator.Validate(v); err != nil {
+		if err := validator.Validate(mode); err != nil {
 			return err
 		}
 
-		payload, err := query.Values(v)
+		payload, err := query.Values(mode)
 		if err != nil {
 			return err
 		}
@@ -27,13 +28,13 @@ func (i *ImageMixin) SetImageCaptureMode(v interface{}) func(h *api.APIHandler) 
 }
 
 // SetDayNightMode set day-night mode.
-func (i *ImageMixin) SetDayNightMode(v interface{}) func(h *api.APIHandler) error {
+func (i *ImageMixin) SetDayNightMode(mode *model.DayNightMode) func(h *api.APIHandler) error {
 	return func(h *api.APIHandler) error {
-		if err := validator.Validate(v); err != nil {
+		if err := validator.Validate(mode); err != nil {
 			return err
 		}
 
-		payload, err := query.Values(v)
+		payload, err := query.Values(mode)
 		if err != nil {
 			return err
 		}
